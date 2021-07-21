@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Chamith</Authors>
+    <Product>Advert Microservices</Product>
+    <PackageProjectUrl>https://github.com/chamithdev/Advert.Api</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/chamithdev/Advert.Api</RepositoryUrl>
+    <Company>None</Company>
   </PropertyGroup>
 
 </Project>

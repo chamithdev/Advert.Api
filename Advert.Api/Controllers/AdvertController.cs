@@ -48,7 +48,7 @@ namespace Advert.Api.Controllers
         [ProducesResponseType(typeof(bool), 200)]
         public async Task<IActionResult> Confirm(ConfirmAdvertModel model)
         {
-            bool success;
+            bool success; 
             try
             {
                 success = await this.advertStorageService.Confirm(model);

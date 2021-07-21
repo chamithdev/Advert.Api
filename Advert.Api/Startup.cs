@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Advert.Api.Services;
+using Advert.Api.HealthChecks;
+using Microsoft.Extensions.HealthChecks;
 
 namespace Advert.Api
 {
@@ -27,8 +29,15 @@ namespace Advert.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddTransient<IAdvertStorageService, DynamoDbAdvertStorageService>();
+            services.AddTransient<IHealthCheck, StorageHealthCheck>();
+            services.AddTransient<IAdvertStorageService, DynamoDbAdvertStorageService>();            
             services.AddControllers();
+            services.AddHealthChecks();
+            services.AddHealthChecks(h =>            {
+               
+                h.AddCheck<StorageHealthCheck>("Storage", new TimeSpan(0, 1, 0));
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +56,7 @@ namespace Advert.Api
             {
                 endpoints.MapControllers();
             });
+            app.UseHealthChecks("/health");
         }
     }
 }
